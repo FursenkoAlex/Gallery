@@ -1,0 +1,119 @@
+﻿<Controls:MetroWindow x:Class="Gallery_.Views.ViewRegistrAuthor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Gallery_.ViewModels"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Registration and Authorization" Height="500" Width="700">
+
+    <Controls:MetroWindow.Resources>
+        <local:Converter x:Key="converter"/>
+    </Controls:MetroWindow.Resources>
+
+    <TabControl>
+        <TabItem Header="Registration" Name="Registration" BorderBrush="White" BorderThickness="1 1 1 0.5">
+            <StackPanel Margin="5,-32,-5,42" >
+
+                <TextBlock Margin="15 20 15 3" Text="Login"></TextBlock>
+                <TextBox Margin="15 1 15 15" 
+                         MaxLength="30" 
+                         Name="login"
+                         Controls:TextBoxHelper.Watermark=" min 1 max 30" 
+                         Controls:TextBoxHelper.ClearTextButton="True"
+                         Text="{Binding LoginUser}" />
+
+                <TextBlock Margin="15 3" Text="Password" ></TextBlock>
+                <TextBox Margin="15 1 15 15"
+                         MaxLength="25"
+                         Name="pass"
+                         Controls:TextBoxHelper.Watermark="min 1 max 30"
+                         Controls:TextBoxHelper.ClearTextButton="True" 
+                         Text="{Binding Password}"
+                         ></TextBox>
+                <TextBlock Margin="15 3" Text="Name"/>
+                <TextBox Margin="15 1 15 15"
+                         MaxLength="50"
+                         Name="name"
+                         Controls:TextBoxHelper.Watermark="min 1 max 30"
+                         Controls:TextBoxHelper.ClearTextButton="True"
+                         Text="{Binding Name}"></TextBox>
+
+                <TextBlock Margin="15 3" Text="Surname"></TextBlock>
+                <TextBox Margin="15 1 15 15"
+                         MaxLength="50"
+                         Name="surname"
+                         Controls:TextBoxHelper.Watermark="min 1 max 30"
+                         Controls:TextBoxHelper.ClearTextButton="True" 
+                         Text="{Binding SurName}"></TextBox>
+
+                <DockPanel >
+                    <Button Margin="20 5 5 5" 
+                         HorizontalAlignment="Center" 
+                        Style="{DynamicResource AccentedSquareButtonStyle}"
+                        Command="{Binding ClickButtonOK_Registr}"
+                        Content="OK" 
+                        MinWidth="40">
+                        
+                        <Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource converter}">
+                                <Binding ElementName="login" Path="Text.Length"></Binding>
+                                <Binding ElementName="pass" Path="Text.Length"></Binding>
+                                <Binding ElementName="name" Path="Text.Length"></Binding>
+                                <Binding ElementName="surname" Path="Text.Length"></Binding>
+                            </MultiBinding>
+                        </Button.IsEnabled>
+                        
+                    </Button>
+                    <Button Margin="20 5 5 5"  HorizontalAlignment="Left" 
+                        Style="{DynamicResource AccentedSquareButtonStyle}"
+                        Command="{Binding ClickButtonCancel_Registr}"
+                    Content="Cancel"/>
+                </DockPanel>
+
+            </StackPanel>
+        </TabItem>
+
+        <TabItem Header="Sign In" Name="SignIn" BorderBrush="White" BorderThickness="0.5 1 1 1">
+            <StackPanel>
+                <TextBlock Margin="15 20 15 3" Text="Login"></TextBlock>
+                <TextBox Margin="15 1 15 15" 
+                         Controls:TextBoxHelper.Watermark="min 1 max 30" 
+                         MaxLength="30" 
+                         Name="log"
+                         Controls:TextBoxHelper.ClearTextButton="True"
+                         Text ="{Binding LoginUser}"
+                         ></TextBox>
+                <TextBlock Margin="15 3" Text="Password"></TextBlock>
+                <TextBox Margin="15 1 15 15"
+                         MaxLength="25"
+                         Name="password"
+                         Controls:TextBoxHelper.Watermark="min 1 max 30"
+                         Controls:TextBoxHelper.ClearTextButton="True"
+                         Text="{Binding Password}"></TextBox>
+                <DockPanel>
+                    <Button Margin="20 5 5 5" HorizontalAlignment="Left" 
+                        Style="{DynamicResource AccentedSquareButtonStyle}"
+                        Command="{Binding ClickButtonOK_Authorization}"
+                        Content="OK"
+                        MinWidth="40">
+
+                        <Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource converter}">
+                                <Binding ElementName="log" Path="Text.Length"></Binding>
+                                <Binding ElementName="password" Path="Text.Length"></Binding>
+                            </MultiBinding>
+                        </Button.IsEnabled>
+                    </Button>
+                    
+                    <Button Margin="20 5 5 5"  HorizontalAlignment="Left" 
+                        Style="{DynamicResource AccentedSquareButtonStyle}"
+                        Command="{Binding ClickButtonCancel_Registr}"
+                    Content="Cancel"></Button>
+                </DockPanel>
+            </StackPanel>
+        </TabItem>
+
+    </TabControl>
+</Controls:MetroWindow>
+
+
+
